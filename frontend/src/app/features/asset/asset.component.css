@@ -1,0 +1,13 @@
+/* Optional: Add light shadow and hover effect */
+.table-hover tbody tr:hover {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+.card {
+  border: none;
+}
+
+textarea {
+  resize: none;
+}

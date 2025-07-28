@@ -48,13 +48,12 @@ namespace backend.Controllers
             return CreatedAtAction(nameof(GetAssetCategory), new { id = category.CategoryId }, category);
         }
 
-        //PUT : api/AssetCategories/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAssetCategory(int id, AssetCategory category)
         {
             if (id != category.CategoryId)
             {
-                return BadRequest();
+                return BadRequest(); // ✅ Correct check to ensure ID in URL and body match
             }
 
             _context.Entry(category).State = EntityState.Modified;
@@ -74,18 +73,19 @@ namespace backend.Controllers
                     throw;
                 }
             }
+
             return NoContent();
         }
 
-        //DELETE : api/AssetCategories/5
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAssetCategory(int id)
         {
             var category = await _context.AssetCategories.FindAsync(id);
 
-            if (category != null)
+            if (category == null)
             {
-                return NotFound();
+                return NotFound(); // ✅ Only return 404 if the category does NOT exist
             }
 
             _context.AssetCategories.Remove(category);
@@ -93,5 +93,6 @@ namespace backend.Controllers
 
             return NoContent();
         }
+
     }
 }

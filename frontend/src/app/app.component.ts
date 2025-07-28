@@ -7,4 +7,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'asset-management';
+
+  isSidebarOpen = false;
+   isSidebarCollapsed = false;
+
+toggleSidebar() {
+  this.isSidebarOpen = !this.isSidebarOpen;
+}
+
+closeSidebar() {
+  this.isSidebarOpen = false;
+}
+  onSidebarToggle(collapsed: boolean) {
+    this.isSidebarCollapsed = collapsed;
+  }
+
 }

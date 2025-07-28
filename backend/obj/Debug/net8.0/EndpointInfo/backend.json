@@ -50,17 +50,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AssetAssignment"
+                "$ref": "#/components/schemas/AssetAssignmentDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AssetAssignment"
+                "$ref": "#/components/schemas/AssetAssignmentDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AssetAssignment"
+                "$ref": "#/components/schemas/AssetAssignmentDto"
               }
             }
           }
@@ -91,6 +91,29 @@
     },
     "/api/AssetAssignments/{id}/return": {
       "put": {
+        "tags": [
+          "AssetAssignments"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AssetAssignments/{id}": {
+      "delete": {
         "tags": [
           "AssetAssignments"
         ],
@@ -728,6 +751,29 @@
           },
           "employee": {
             "$ref": "#/components/schemas/Employee"
+          },
+          "assignedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "returnDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AssetAssignmentDto": {
+        "type": "object",
+        "properties": {
+          "assetId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "employeeId": {
+            "type": "integer",
+            "format": "int32"
           },
           "assignedDate": {
             "type": "string",

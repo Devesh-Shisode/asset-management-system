@@ -1,0 +1,38 @@
+:root {
+  --sidebar-width: 250px;
+  --sidebar-width-collapsed: 60px;
+  --header-height: 60px;
+}
+
+/* Make sure sidebar stays fixed */
+app-sidebar {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  height: calc(100vh - var(--header-height));
+  z-index: 1000;
+}
+
+/* Header styles */
+app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  z-index: 1001;
+}
+
+/* Footer styles */
+app-footer {
+  margin-left: var(--sidebar-width);
+  padding: 1rem;
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+}
+
+/* Responsive handling when sidebar is collapsed */
+.sidebar-collapsed app-footer {
+  margin-left: var(--sidebar-width-collapsed);
+}

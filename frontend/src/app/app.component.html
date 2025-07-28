@@ -1,4 +1,16 @@
-<app-sidebar></app-sidebar>
-<div style="margin-left: 220px; padding: 1.5rem;">
+<app-header [ngStyle]="{ 'margin-left': isSidebarCollapsed ? '60px' : '250px' }"></app-header>
+
+<app-sidebar (sidebarToggled)="onSidebarToggle($event)"></app-sidebar>
+
+<div
+  [ngStyle]="{ 'margin-left': isSidebarCollapsed ? '60px' : '250px' }"
+  class="main-wrapper"
+  style="transition: margin-left 0.3s ease-in-out; padding: 1.5rem; margin-top: 60px;"
+>
   <router-outlet></router-outlet>
 </div>
+
+<app-footer
+  [ngStyle]="{ 'margin-left': isSidebarCollapsed ? '60px' : '250px' }"
+></app-footer>
+

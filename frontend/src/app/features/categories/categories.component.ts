@@ -21,12 +21,16 @@ export class CategoriesComponent implements OnInit {
   constructor(private assetService: AssetService) {}
 
   ngOnInit(): void {
+    
     this.fetchCategories();
+
   }
 
   fetchCategories() {
-    this.assetService.getAssetCategories().subscribe(data => {
-      this.categories = data;
+    this.assetService.getAssetCategories().subscribe((data : any) => {
+      console.log(data);
+      
+      this.categories = data
     });
   }
 
@@ -42,10 +46,15 @@ export class CategoriesComponent implements OnInit {
         this.resetForm(form);
       });
     } else {
-      this.assetService.addCategory(this.newCategory).subscribe(() => {
-        this.fetchCategories();
-        this.resetForm(form);
-      });
+      this.assetService.addCategory(this.newCategory).subscribe({
+  next: () => {
+    this.fetchCategories();
+   // form.resetForm();
+  },
+  error: (err) => {
+    console.error('API Error:', err.error.err);
+  }
+});
     }
   }
 
@@ -72,4 +81,7 @@ export class CategoriesComponent implements OnInit {
     this.editId = null;
     this.isEditMode = false;
   }
+
+    
+
 }

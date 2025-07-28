@@ -1,21 +1,81 @@
-<div class="section">
-  <h3>Asset Assignments</h3>
-  <form  >
-    <select   name="assetId">
-      <!-- <option *ngFor="let asset of assets" [value]="asset.id">{{ asset.name }}</option> -->
-    </select>
-    <select   name="employeeId">
-      <!-- <option *ngFor="let emp of employees" [value]="emp.id">{{ emp.name }}</option> -->
-    </select>
-    <input type="date" name="assignedDate" required />
-    <button type="submit">Assign</button>
-  </form>
-  <table>
-    <!-- <tr *ngFor="let a of assignments">
-      <td>{{ a.assetName }}</td>
-      <td>{{ a.employeeName }}</td>
-      <td>{{ a.assignedDate }}</td>
-      <td>{{ a.returnDate || 'Active' }}</td>
-    </tr>
-  </table> -->
- 
+<div class="container py-4">
+  <div class="container-fluid">
+    <!-- 🔹 Form Card -->
+    <div class="card border-0 shadow-lg rounded-4 mb-5">
+      <div
+        class="card-header text-white"
+        style="background: linear-gradient(135deg, #6a11cb, #2575fc)"
+      >
+        <h5 class="mb-0 fw-semibold">
+          <i class="bi bi-plus-circle me-2"></i>
+          Assign Asset
+        </h5>
+    </div>
+    <div class="card-body">
+      <form #assignForm="ngForm" (ngSubmit)="onAssign(assignForm)">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="assetId" class="form-label">Asset ID</label>
+            <input type="number" id="assetId" class="form-control" [(ngModel)]="newAssignment.assetId" name="assetId" required>
+          </div>
+          <div class="col-md-6">
+            <label for="employeeId" class="form-label">Employee ID</label>
+            <input type="number" id="employeeId" class="form-control" [(ngModel)]="newAssignment.employeeId" name="employeeId" required>
+          </div>
+          <div class="col-12 text-end">
+            <button type="submit" class="btn btn-success px-4">
+              <i class="bi bi-plus-circle me-1"></i> Assign
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="card shadow rounded-3">
+    <div class="card-header bg-dark text-white">
+      <h5 class="mb-0">Asset Assignment List</h5>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>#</th>
+            <th>Asset ID</th>
+            <th>Employee ID</th>
+            <th>Assigned Date</th>
+            <th>Return Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let assignment of assignments; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ assignment.assetId }}</td>
+            <td>{{ assignment.employeeId }}</td>
+            <td>{{ assignment.assignedDate | date: 'medium' }}</td>
+            <td>
+              <span *ngIf="assignment.returnDate; else notReturned">
+                {{ assignment.returnDate | date: 'medium' }}
+              </span>
+              <ng-template #notReturned>--</ng-template>
+            </td>
+            <td>
+              <button *ngIf="!assignment.returnDate"
+                      (click)="onReturn(assignment.id)"
+                      class="btn btn-sm btn-outline-warning me-2"
+                      title="Return Asset">
+                <i class="bi bi-arrow-return-left"></i>
+              </button>
+              <button (click)="deleteAssignment(assignment.id)"
+                      class="btn btn-sm btn-outline-danger"
+                      title="Delete Assignment">
+                <i class="bi bi-trash3"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

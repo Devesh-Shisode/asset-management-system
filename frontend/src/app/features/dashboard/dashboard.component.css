@@ -1,0 +1,85 @@
+/* Layout Basics */
+.dashboard-wrapper {
+  min-height: 100vh;
+}
+
+.gradient-sidebar {
+  background: linear-gradient(145deg, #1d3557, #457b9d);
+  min-height: 100vh;
+  border-radius: 9px; /* Smooth rounded edges */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow behind sidebar */
+}
+
+
+.quick-link-item {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.quick-link-item:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateX(5px);
+  text-decoration: none;
+}
+
+.quick-link-item i {
+  font-size: 1rem;
+}
+
+
+
+/* Text gradient for title */
+.text-gradient {
+  background: linear-gradient(45deg, #0d6efd, #6610f2);
+  background-clip: text; /* ✅ Standard property */
+  -webkit-background-clip: text; /* ✅ WebKit fallback */
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* Stat Cards */
+.stat-card {
+  border-radius: 1rem;
+  transition: transform 0.3s;
+}
+.stat-card:hover {
+  transform: scale(1.05);
+}
+
+/* Gradients for stat cards */
+.gradient-0 { background: linear-gradient(to right, #007bff, #00c6ff); }
+.gradient-1 { background: linear-gradient(to right, #28a745, #85e085); }
+.gradient-2 { background: linear-gradient(to right, #fd7e14, #ffb84d); }
+.gradient-3 { background: linear-gradient(to right, #6f42c1, #b19cd9); }
+.gradient-4 { background: linear-gradient(to right, #dc3545, #ff6f61); }
+
+/* Chart Cards */
+.gradient-chart {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+}
+.gradient-chart-2 {
+  background: linear-gradient(to right, #42275a, #734b6d);
+}
+
+/* Dark Mode Overrides */
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+body.dark-mode .form-select,
+body.dark-mode .form-check-label {
+  background-color: #1f1f1f;
+  color: white;
+}
+
+body.dark-mode .list-group-item {
+  background-color: #2c2c2c;
+  color: white;
+}

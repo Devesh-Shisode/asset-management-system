@@ -1,0 +1,15 @@
+<div class="container py-4">
+  <h4>Search Results for: <strong>{{ query }}</strong></h4>
+  <div *ngIf="results.length === 0" class="text-muted mt-3">
+    No results found.
+  </div>
+
+  <div *ngFor="let item of results" class="card shadow-sm mb-3">
+    <div class="card-body">
+      <h6 class="card-title">
+        {{ item.type }} - {{ item.data.name || item.data.email || 'No Name' }}
+      </h6>
+      <p *ngIf="item.data.description">{{ item.data.description }}</p>
+    </div>
+  </div>
+</div>

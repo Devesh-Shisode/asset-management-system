@@ -1,9 +1,164 @@
-<div class="dashboard">
-  <h2>Welcome to Asset Management System</h2>
-  <div class="dashboard-grid">
-    <div class="card">Total Assets:  </div>
-    <div class="card">Total Categories:  </div>
-    <div class="card">Total Employees:  </div>
-    <div class="card">Assigned Assets: </div>
+<div class="d-flex dashboard-wrapper">
+  <!-- 🔹 Sidebar -->
+ <nav class="sidebar gradient-sidebar text-white p-4 shadow-lg rounded-end">
+  <h5 class="fw-bold mb-4 text-uppercase tracking-wide">📁 Quick Links</h5>
+  <ul class="nav flex-column gap-2">
+    <li class="nav-item">
+      <a class="nav-link quick-link-item" routerLink="/assets">
+        <i class="fas fa-box me-2"></i> Assets
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link quick-link-item" routerLink="/employees">
+        <i class="fas fa-user-tie me-2"></i> Employees
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link quick-link-item" routerLink="/assignments">
+        <i class="fas fa-exchange-alt me-2"></i> Assignments
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link quick-link-item" routerLink="/categories">
+        <i class="fas fa-layer-group me-2"></i> Categories
+      </a>
+    </li>
+  </ul>
+</nav>
+
+
+  <!-- 🔸 Main Content -->
+  <div class="flex-grow-1 main-content px-5 py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold text-gradient">📊 Asset Management Dashboard</h2>
+      <div class="form-check form-switch">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="darkModeToggle"
+          (change)="toggleDarkMode()"
+        />
+        <label class="form-check-label" for="darkModeToggle"
+          >🌙 Dark Mode</label
+        >
+      </div>
+    </div>
+
+    <!-- 🔹 Stat Cards -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-3" *ngFor="let stat of dashboardStats; let i = index">
+        <div
+          class="card stat-card text-center preserve-bg shadow border-0 text-white"
+          [ngClass]="['gradient-' + (i % 5)]"
+        >
+          <div class="card-body">
+            <h6 class="mb-1 fw-semibold">{{ stat.label }}</h6>
+            <h3 class="fw-bold">
+              <span [id]="'stat-count-' + i">0</span>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔹 Category Filter -->
+    <div class="mb-4">
+      <select
+        class="form-select w-auto"
+        (change)="onFilterCategoryChange($event)"
+      >
+        <option value="">All Categories</option>
+        <option *ngFor="let category of categories" [value]="category.name">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+
+    <!-- 🔹 Charts -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-6">
+        <div class="card chart-card gradient-chart preserve-bg shadow text-white border-0">
+          <div class="card-header fw-semibold">
+            📦 Asset Availability (Donut)
+          </div>
+          <div class="card-body">
+      <canvas baseChart
+  [data]="donutChartData"
+  [type]="donutChartType"
+  [options]="donutChartOptions">
+</canvas>
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div
+          class="card chart-card gradient-chart-2 preserve-bg shadow text-white border-0"
+        >
+          <div class="card-header fw-semibold">🗃️ Assets by Category (Bar)</div>
+          <div class="card-body">
+             <canvas
+              baseChart
+              [data]="{ labels: barChartLabels, datasets: barChartData }"
+              [type]="barChartType"
+              [options]="barChartOptions"
+            >
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔹 Return Summary -->
+    <div class="card shadow border-0 rounded-4">
+      <div class="card-header bg-dark text-white fw-semibold">
+        ⏳ Asset Return Summary
+      </div>
+      <div class="card-body row">
+        <div class="col-md-6 mb-3">
+          <h6 class="fw-bold text-secondary">📅 Upcoming Returns</h6>
+          <ul class="list-group">
+            <li
+              *ngFor="let item of upcomingReturns"
+              class="list-group-item d-flex justify-content-between"
+            >
+              {{ item.asset.name }} - {{ item.employee.name }}
+              <span class="badge bg-success">{{
+                item.returnDate | date : "shortDate"
+              }}</span>
+            </li>
+            <li
+              *ngIf="upcomingReturns.length === 0"
+              class="list-group-item text-muted"
+            >
+              No upcoming returns
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <h6 class="fw-bold text-secondary">❗ Overdue Returns</h6>
+          <ul class="list-group">
+            <li
+              *ngFor="let item of overdueAssignments"
+              class="list-group-item d-flex justify-content-between"
+            >
+              {{ item.asset.name }} - {{ item.employee.name }}
+              <span class="badge bg-danger">{{
+                item.returnDate | date : "shortDate"
+              }}</span>
+            </li>
+            <li
+              *ngIf="overdueAssignments.length === 0"
+              class="list-group-item text-muted"
+            >
+              No overdue returns
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

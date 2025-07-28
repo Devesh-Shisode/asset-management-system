@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CompanyNameService } from 'src/app/core/services/compny-name.service';
  
 
 @Component({
@@ -10,13 +11,16 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
      
-companyName: string = 'Codemind Technologies';
+companyName: string = 'CodeDisha Technologies';
 
   searchQuery: string = '';
   results: any[] = [];
-  constructor( private router: Router) { }
+  constructor(private companyService : CompanyNameService ,private router: Router) { }
 
   ngOnInit(): void {
+     this.companyService.companyName$.subscribe(name => {
+      this.companyName = name;
+  });
   }
   onSearch() {
   if (!this.searchQuery.trim()) return;

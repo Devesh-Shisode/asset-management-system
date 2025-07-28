@@ -1,7 +1,59 @@
-<div class="login-container">
-  <form  >
-    <input  name="email" placeholder="Email" required />
-    <input   type="password" name="password" placeholder="Password" required />
-    <button type="submit">Login</button>
-  </form>
+<div class="login-wrapper">
+  <div class="background-animation">
+  <!-- Rotating Icons -->
+  <div class="icon rotate">💻</div>     <!-- Laptop -->
+  <div class="icon rotate delay">📱</div> <!-- Mobile -->
+  <div class="icon rotate">🖨️</div>     <!-- Printer -->
+  
+  <!-- Bouncing Icons -->
+  <div class="icon bounce">📦</div>     <!-- Package -->
+  <div class="icon bounce delay">📁</div> <!-- Folder -->
+  <div class="icon bounce">🖱️</div>     <!-- Mouse -->
+
+  <!-- Floating Icons -->
+  <div class="icon float">🔌</div>      <!-- Plug -->
+  <div class="icon float delay">🎧</div> <!-- Headphones -->
+  <div class="icon float">🖥️</div>     <!-- Desktop -->
+
+  <!-- Pulsing Icons -->
+  <div class="icon pulse">🔒</div>      <!-- Lock -->
+  <div class="icon pulse delay">🗂️</div> <!-- Files -->
+  <div class="icon pulse">🧾</div>     <!-- Receipt -->
+</div>
+
+
+  <div class="login-card">
+    <div class="logo-placeholder">
+      <!-- Logo -->
+      <h2>Asset Manager</h2>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <h3>Login</h3>
+
+      <label>Email:</label>
+      <input formControlName="email" type="email" />
+      <div class="error" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+        Email is required
+      </div>
+
+      <label>Password:</label>
+      <input formControlName="password" type="password" />
+      <div class="error" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        Password is required
+      </div>
+
+      <label>Company Name:</label>
+      <input formControlName="companyname" type="companyname" placeholder="Ex.Company Pvt Ltd" />
+      <div class="error" *ngIf="loginForm.get('companyname')?.invalid && loginForm.get('companyname')?.touched">
+        Company name is required
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid" (click)="onLoginSuccess()">Sign In</button>
+
+      <p class="register-link">
+        Don't have an account? <a routerLink="/register">Register here</a>
+      </p>
+    </form>
+  </div>
 </div>

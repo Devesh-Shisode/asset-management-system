@@ -22,6 +22,8 @@ export class SearchResultsComponent implements OnInit {
       this.query = params['query'] || '';
       if (this.query) {
         this.searchService.searchAll(this.query).subscribe(data => {
+          console.log(data);
+          
           this.results = data;
         });
       }

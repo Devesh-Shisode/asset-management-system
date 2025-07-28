@@ -1,0 +1,71 @@
+<div class="custom-download-container">
+  <h4 class="title">📥 Custom Download</h4>
+
+  <!-- Data Type -->
+  <div class="form-group">
+    <label for="dataType">Choose Data Type:</label>
+    <select id="dataType" [(ngModel)]="selectedType" class="form-control" (change)="onTypeChange()">
+      <option value="" disabled>Select Type</option>
+      <option *ngFor="let type of dataTypes" [value]="type">{{ type }}</option>
+    </select>
+  </div>
+
+  <!-- Fields to Include -->
+  <div class="form-group" *ngIf="availableFields && availableFields.length">
+    <label>Select Fields to Include:</label>
+    <div class="checkbox-group">
+      <label *ngFor="let field of availableFields" class="checkbox-item">
+        <input type="checkbox" [(ngModel)]="field.selected" />
+        {{ field.name }}
+      </label>
+    </div>
+  </div>
+
+  <!-- Format Selection -->
+  <div class="form-group">
+    <label for="format">Select Format:</label>
+    <select id="format" [(ngModel)]="selectedFormat" class="form-control">
+      <option value="" disabled>Select Format</option>
+      <option *ngFor="let format of formats" [value]="format">
+        {{
+          format === 'CSV' ? '📄 CSV' :
+          format === 'Excel' ? '📊 Excel' :
+          format === 'PDF' ? '📘 PDF' :
+          format
+        }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Filter Input -->
+  <div class="form-group">
+    <label for="filter">Filter by Employee Name or ID:</label>
+    <input id="filter" type="text" [(ngModel)]="filterValue" class="form-control" placeholder="Enter name or ID" />
+  </div>
+
+  <!-- Preview Table -->
+  <div class="table-responsive mt-4" *ngIf="filteredPreviewData.length > 0 && selectedFields.length > 0">
+    <table class="table table-bordered table-striped">
+      <thead class="table-light">
+        <tr>
+          <th *ngFor="let field of selectedFields">{{ field }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of filteredPreviewData">
+          <td *ngFor="let field of selectedFields">
+            {{ row[field] }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Sticky Download Button -->
+  <button
+    class="btn btn-success download-button"
+    (click)="download()"
+    [disabled]="!canDownload()">
+    ⬇️ Download {{ selectedFormat }}
+  </button>
+</div>

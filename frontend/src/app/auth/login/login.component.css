@@ -1,0 +1,136 @@
+/* Base setup */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  overflow: hidden;
+}
+
+.login-wrapper {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  background : linear-gradient(to right, #d3e3f1, #91ecf1);
+  justify-content: center;
+  align-items: center;
+}
+.background-animation {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.icon {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.2;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+}
+
+.rotate {
+  animation-name: rotateAnim;
+}
+.bounce {
+  animation-name: bounceAnim;
+}
+.float {
+  animation-name: floatAnim;
+}
+.pulse {
+  animation-name: pulseAnim;
+}
+.delay {
+  animation-delay: 2s;
+}
+
+.icon:nth-child(1) { top: 10%; left: 10%; }  /* 💻 */
+.icon:nth-child(2) { top: 25%; left: 70%; }  /* 📦 */
+.icon:nth-child(3) { top: 40%; left: 20%; }  /* 📱 */
+.icon:nth-child(4) { top: 60%; left: 80%; }  /* 🖨️ */
+.icon:nth-child(5) { top: 75%; left: 15%; }  /* 📁 */
+.icon:nth-child(6) { top: 30%; left: 45%; }  /* 🖱️ */
+.icon:nth-child(7) { top: 85%; left: 65%; }  /* 🔌 */
+.icon:nth-child(8) { top: 50%; left: 55%; }  /* 🎧 */
+.icon:nth-child(9) { top: 15%; left: 80%; }  /* 🖥️ */
+.icon:nth-child(10) { top: 35%; left: 5%; }  /* 🔒 */
+.icon:nth-child(11) { top: 65%; left: 30%; } /* 🗂️ */
+.icon:nth-child(12) { top: 80%; left: 50%; } /* 🧾 */
+
+@keyframes rotateAnim {
+  0% { transform: rotate(0deg) translateY(0); }
+  100% { transform: rotate(360deg) translateY(-20px); }
+}
+@keyframes bounceAnim {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+@keyframes floatAnim {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes pulseAnim {
+  0%, 100% { transform: scale(1); opacity: 0.2; }
+  50% { transform: scale(1.2); opacity: 0.4; }
+}
+
+/* Login Card */
+.login-card {
+  background-color: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  width: 350px;
+  z-index: 10;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.logo-placeholder {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input[type="email"],
+input[type="password"], 
+input[type="companyname"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #5a67d8;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.register-link {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+}

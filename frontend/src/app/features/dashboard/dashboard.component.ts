@@ -28,8 +28,8 @@ export class DashboardComponent implements OnInit {
     labels: ['Available', 'Assigned'],
     datasets: [
       {
-        data: [60, 40], // Replace with your actual values
-        backgroundColor: ['#198754', '#dc3545'], // Green and red, you can customize
+        data: [60, 40],  
+        backgroundColor: ['#198754', '#dc3545'],  
         hoverOffset: 6,
       },
     ],
@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.loadAllData();
 
-    // Restore dark mode from storage
+    
     if (localStorage.getItem('darkMode') === 'true') {
       document.body.classList.add('dark-mode');
       (document.getElementById('darkModeToggle') as HTMLInputElement).checked =
@@ -150,7 +150,7 @@ export class DashboardComponent implements OnInit {
     ];
   }
 
-  // 🔹 Navigate to respective section
+   
   navigateTo(path: string) {
     this.router.navigate([path]);
   }
@@ -160,7 +160,7 @@ export class DashboardComponent implements OnInit {
     const selectElement = event.target as HTMLSelectElement;
     const selectedCategory = selectElement.value;
     console.log('Selected Category:', selectedCategory);
-    // Add your filtering logic here
+     
   }
 
   ngAfterViewInit(): void {
@@ -177,7 +177,7 @@ export class DashboardComponent implements OnInit {
   }
 
 donutChartOptions: any = {
-  cutout: '70%', // Adjust between 50%-90% for thinner donut ring
+  cutout: '70%', 
   plugins: {
     legend: {
       position: 'bottom'

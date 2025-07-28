@@ -7,9 +7,10 @@ import { CategoriesComponent } from './features/categories/categories.component'
 
 import { AssetComponent } from './features/asset/asset.component';
 import { SearchResultsComponent } from './features/search-results/search-results.component';
+import { DownloadComponent } from './features/download/download.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' }, // Default route
+  { path: '', redirectTo: 'login', pathMatch: 'full' },  
   { path: 'login', component: LoginComponent },
   {
     path: 'dashboard',
@@ -31,6 +32,7 @@ const routes: Routes = [
       import('./features/asset/asset.module').then((m) => m.AssetModule),
   },
   { path: 'assignments', component: AssignmentsComponent },
+  { path: 'download' , component : DownloadComponent},
   {
     path: 'employees',
     loadChildren: () =>

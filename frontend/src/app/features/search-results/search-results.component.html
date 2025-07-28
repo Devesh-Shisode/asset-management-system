@@ -1,15 +1,52 @@
 <div class="container py-4">
-  <h4>Search Results for: <strong>{{ query }}</strong></h4>
+  <h4 class="mb-4">
+    Search Results for: <strong>{{ query }}</strong>
+  </h4>
+
+  <!-- No results message -->
   <div *ngIf="results.length === 0" class="text-muted mt-3">
     No results found.
   </div>
 
+  <!-- Results -->
   <div *ngFor="let item of results" class="card shadow-sm mb-3">
     <div class="card-body">
-      <h6 class="card-title">
-        {{ item.type }} - {{ item.data.name || item.data.email || 'No Name' }}
-      </h6>
-      <p *ngIf="item.data.description">{{ item.data.description }}</p>
+      <h5 class="card-title text-primary">{{ item.type }}</h5>
+
+      <!-- Employee Details -->
+      <div *ngIf="item.type.includes('Employee')">
+        <p><strong>Employee ID: </strong>{{ item.data.employeeId}}</p>
+        <p><strong>Name:</strong> {{ item.data.name }}</p>
+        <p><strong>Email:</strong> {{ item.data.email }}</p>
+        <p *ngIf="item.data.department"><strong>Department:</strong> {{ item.data.department }}</p>
+      </div>
+
+      <!-- Asset Details -->
+      <div *ngIf="item.type.includes('Asset') && !item.type.includes('Usage')">
+        <p><strong>Name:</strong> {{ item.data.name }}</p>
+        <p><strong>Quantity:</strong> {{ item.data.quantity }}</p>
+        <p *ngIf="item.data.category?.name"><strong>Category:</strong> {{ item.data.category.name }}</p>
+      </div>
+
+      <!-- Assignment Details -->
+      <div *ngIf="item.type.includes('Assignment')">
+        <p><strong>Asset:</strong> {{ item.data.asset?.name }}</p>
+        <p><strong>Employee:</strong> {{ item.data.employee?.name }}</p>
+        <p *ngIf="item.data.assignedDate"><strong>Assigned On:</strong> {{ item.data.assignedDate | date }}</p>
+      </div>
+
+      <!-- Category Details -->
+      <div *ngIf="item.type.includes('Category')">
+        <p><strong>Name:</strong> {{ item.data.name }}</p>
+        <p *ngIf="item.data.description"><strong>Description:</strong> {{ item.data.description }}</p>
+      </div>
+
+      <!-- Asset Usage Summary -->
+      <div *ngIf="item.type === 'Asset Usage Summary'">
+        <p><strong>Asset:</strong> {{ item.data.assetName }}</p>
+        <p><strong>Total Assigned:</strong> {{ item.data.totalAssigned }}</p>
+        <p><strong>Total Available:</strong> {{ item.data.totalAvailable }}</p>
+      </div>
     </div>
   </div>
 </div>

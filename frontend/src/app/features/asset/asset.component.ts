@@ -53,13 +53,13 @@ export class AssetComponent implements OnInit {
   }
 
  onSubmit(form: NgForm) {
-  // Prevent duplicate serial numbers
+   
   if (this.serialExists(this.newAsset.serialNumber)) {
     alert('Serial Number already exists!');
     return;
   }
 
-  // Edit mode
+   
   if (this.isEditMode && this.editId !== null) {
     const updatedAsset: Asset = {
       assetId: this.editId,
@@ -77,7 +77,7 @@ export class AssetComponent implements OnInit {
       this.resetForm(form);
     });
   } 
-  // Add mode
+  
   else {
     this.assetService.addAsset(this.newAsset).subscribe({
       next: () => {

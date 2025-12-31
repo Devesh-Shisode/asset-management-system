@@ -1,4 +1,5 @@
-<div class="login-wrapper">
+<p>register works!</p>
+<div class="register-wrapper">
   <div class="background-animation">
   <!-- Rotating Icons -->
   <div class="icon rotate">💻</div>     <!-- Laptop -->
@@ -22,39 +23,50 @@
 </div>
 
 
-<div class="login-card">
+
+
+<div class="register-card">
     <div class="logo-placeholder">
       <!-- Logo -->
       <h2>Asset Manager</h2>
     </div>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <h3>Login</h3>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <h3>Register</h3>
+
+      
+      <label>Name:</label>
+      <input formControlName="Name" type="text" />
+      <div class="error" *ngIf="registrationForm.get('Name')?.invalid && registrationForm.get('Name')?.touched">
+        Email is required
+      </div>
 
       <label>Email:</label>
       <input formControlName="email" type="email" />
-      <div class="error" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+      <div class="error" *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
         Email is required
       </div>
 
       <label>Password:</label>
       <input formControlName="password" type="password" />
-      <div class="error" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+      <div class="error" *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
         Password is required
       </div>
 
+      <label>Conform Password:</label>
+      <input formControlName="Conform password" type="password" />
+      <div class="error" *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
+        Password is required
+      </div>
+
+
       <label>Company Name:</label>
       <input formControlName="companyname" type="companyname" placeholder="Ex.Company Pvt Ltd" />
-      <div class="error" *ngIf="loginForm.get('companyname')?.invalid && loginForm.get('companyname')?.touched">
+      <div class="error" *ngIf="registrationForm.get('companyname')?.invalid && registrationForm.get('companyname')?.touched">
         Company name is required
       </div>
 
-      <button type="submit" [disabled]="loginForm.invalid" (click)="onLoginSuccess()">Sign In</button>
-
-      <p class="register-link">
-        Don't have an account? <a routerLink="/register">Register here</a>
-      </p>
+      <button type="submit" [disabled]="registrationForm.invalid" (click)="onRegisterSuccess()">Submit</button>
+      
     </form>
   </div>
-</div>
-  

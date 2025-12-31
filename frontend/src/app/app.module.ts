@@ -14,10 +14,11 @@ import { FooterComponent } from './shared/componets/footer/footer.component';
 import { SearchResultsComponent } from './features/search-results/search-results.component';
 import { DownloadComponent } from './features/download/download.component';
 import { FilterPipe } from './shared/pipes/filter.pipe';
+import { RegisterComponent } from './auth/register/register.component';
  
 
 @NgModule({
-  declarations: [AppComponent, SidebarComponent, LoginComponent, HeaderComponent, FooterComponent, SearchResultsComponent, DownloadComponent, FilterPipe],
+  declarations: [AppComponent, SidebarComponent, LoginComponent, HeaderComponent, FooterComponent, SearchResultsComponent, DownloadComponent, FilterPipe, RegisterComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule,NgChartsModule ,ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
